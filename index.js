@@ -27,14 +27,14 @@ const bucket = storage.bucket("re.tristansmp.com");
 
 execSync("(cd src && zip -r ../resources.zip .)");
 
-const sha = execSync("sha256sum resources.zip").toString().split(" ")[0];
+const sha1 = execSync("sha1sum resources.zip").toString().split(" ")[0];
 
-fs.writeFileSync("resources.zip.sha256", sha);
+fs.writeFileSync("resources.zip.sha1", sha1);
 
 bucket.upload("resources.zip", {
   destination: "resources.zip",
 });
 
-bucket.upload("resources.zip.sha256", {
-  destination: "resources.zip.sha256",
+bucket.upload("resources.zip.sha1", {
+  destination: "resources.zip.sha1",
 });
