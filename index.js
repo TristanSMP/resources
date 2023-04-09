@@ -6,10 +6,7 @@ import * as fs from "node:fs";
 
 const McMeta = {
   pack: {
-    description: `§dtsmp x vane§7 - §u✎ §p${process.env.GITHUB_SHA?.slice(
-      0,
-      7
-    )}§r`,
+    description: `§dtsmp x vane\n§p${process.env.GITHUB_SHA?.slice(0, 7)}`,
     pack_format: 13,
   },
 };
