@@ -25,7 +25,7 @@ const storage = new Storage({
 
 const bucket = storage.bucket("re.tristansmp.com");
 
-execSync("zip -r resources.zip src/*");
+execSync("(cd src && zip -r ../resources.zip .)");
 
 bucket.upload("resources.zip", {
   destination: "resources.zip",
