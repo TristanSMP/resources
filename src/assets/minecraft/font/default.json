@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "tsmp:font/tsmp_title.png",
+      "height": 64,
+      "ascent": 0,
+      "chars": ["\uE000"]
+    }
+  ]
+}
