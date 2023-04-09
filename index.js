@@ -1,7 +1,6 @@
-// @ts-ignore
+// @ts-check
 
-import * as ActionsCore from "@actions/core";
-import * as GitHub from "@actions/github";
+import { Storage } from "@google-cloud/storage";
 import { execSync } from "node:child_process";
 import * as fs from "node:fs";
 
@@ -15,24 +14,19 @@ const McMeta = {
   },
 };
 
-const packMcMeta = JSON.stringify(McMeta, null, 2);
+fs.writeFileSync("src/pack.mcmeta", JSON.stringify(McMeta, null, 2));
 
-fs.writeFileSync("src/pack.mcmeta", packMcMeta);
-
-const client = new GitHub.GitHub(process.env.GITHUB_TOKEN);
-
-execSync("zip -r -q -X -9 -y -o -j src.zip src");
-
-const upload = await client.repos.createReleaseAsset({
-  owner: "tristansmp",
-  repo: "resources",
-  release_id: 1,
-  name: "src.zip",
-  data: fs.readFileSync("src.zip"),
-  headers: {
-    "content-type": "application/zip",
-    "content-length": fs.statSync("src.zip").size,
-  },
+const storage = new Storage({
+  credentials: JSON.parse(
+    // @ts-ignore
+    Buffer.from(process.env.GCLOUD_SERVICE_KEY, "base64").toString("ascii")
+  ),
 });
 
-ActionsCore.setOutput("upload_url", upload.data.browser_download_url);
+const bucket = storage.bucket("re.tristansmp.com");
+
+execSync("zip -r resources.zip src/*");
+
+bucket.upload("resources.zip", {
+  destination: "resources.zip",
+});
