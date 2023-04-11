@@ -31,7 +31,7 @@
       "model": "vane_trifles:item/death_scroll"
     },
     {
-      "predicate": { "custom_model_data": 9001 },
+      "predicate": { "custom_model_data": 7733267 },
       "model": "tsmp:item/music_disc_coffee_shop"
     }
   ]
