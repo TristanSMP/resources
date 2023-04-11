@@ -42,8 +42,14 @@ fs.writeFileSync("resources.zip.sha1", sha1);
 
 bucket.upload("resources.zip", {
   destination: "resources.zip",
+  metadata: {
+    cacheControl: "no-cache",
+  },
 });
 
 bucket.upload("resources.zip.sha1", {
   destination: "resources.zip.sha1",
+  metadata: {
+    cacheControl: "no-cache",
+  },
 });
