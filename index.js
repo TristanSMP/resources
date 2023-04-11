@@ -13,6 +13,18 @@ const McMeta = {
 
 fs.writeFileSync("src/pack.mcmeta", JSON.stringify(McMeta, null, 2));
 
+const Music = [
+  {
+    name: "coffee_shop",
+    url: "https://github.com/twisttaan/TristanLofi/raw/main/coffee-shop-vibes/coffeeshop.ogg",
+  },
+];
+
+for (const song of Music) {
+  const { name, url } = song;
+  execSync(`curl -L ${url} -o src/assets/tsmp/sounds/music/${name}.ogg`);
+}
+
 const storage = new Storage({
   credentials: JSON.parse(
     // @ts-ignore
