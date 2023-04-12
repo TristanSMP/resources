@@ -1,5 +1,8 @@
 {
   "music.coffee_shop": {
     "sounds": ["tsmp:music/coffee_shop"]
+  },
+  "voice.tristan.proof_of_concept": {
+    "sounds": ["tsmp:voice/tristan/proof_of_concept"]
   }
 }

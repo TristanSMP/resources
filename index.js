@@ -13,16 +13,23 @@ const McMeta = {
 
 fs.writeFileSync("src/pack.mcmeta", JSON.stringify(McMeta, null, 2));
 
-const Music = [
+const Audio = [
   {
     name: "coffee_shop",
+    sub: "music",
     url: "https://github.com/twisttaan/TristanLofi/raw/main/coffee-shop-vibes/coffeeshop.ogg",
+  },
+  {
+    name: "proof_of_concept",
+    sub: "voice/tristan",
+    url: "https://cdn.tristancamejo.com/tsmp/proof_of_concept.ogg",
   },
 ];
 
-for (const song of Music) {
-  const { name, url } = song;
-  execSync(`curl -L ${url} -o src/assets/tsmp/sounds/music/${name}.ogg`);
+for (const song of Audio) {
+  const { name, url, sub } = song;
+  execSync(`mkdir -p src/assets/tsmp/sounds/${sub}`);
+  execSync(`curl -L ${url} -o src/assets/tsmp/sounds/${sub}/${name}.ogg`);
 }
 
 const storage = new Storage({
